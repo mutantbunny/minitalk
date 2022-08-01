@@ -1,0 +1,6 @@
+build/
+test/
+.vscode/
+*.o
+*.a
+.gdb_history

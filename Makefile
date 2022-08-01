@@ -66,19 +66,19 @@ $(SERVER_BONUS_NAME): $(LIBFT_FILE) $(SERVER_OBJ_FILES) $(SERVER_HEADER_FILES)
 	mkdir -p $(BUILD_DIR)
 	$(CC) $(CC_FLAGS) $(SERVER_OBJ_FILES) $(INCLUDE_FLAGS) $(LIB_FLAGS) -o $@
 
-$(OBJ_BONUS_DIR)/client/%.o: $(CLIENT_SRC_BONUS_DIR)/%.c $(CLIENT_HEADER_BONUS_FILES)
+$(OBJ_BONUS_DIR)/client/%.o: $(SRC_BONUS_DIR)/client/%.c $(CLIENT_HEADER_BONUS_FILES)
 	mkdir -p $(OBJ_BONUS_DIR)/client
 	$(CC) $(CC_FLAGS) $< $(INCLUDE_BONUS_FLAGS) -c -o $@
 
-$(OBJ_BONUS_DIR)/server/%.o: $(SERVER_SRC_BONUS_DIR)/%.c $(SERVER_HEADER_BONUS_FILES)
+$(OBJ_BONUS_DIR)/server/%.o: $(SRC_BONUS_DIR)/server/%.c $(SERVER_HEADER_BONUS_FILES)
 	mkdir -p $(OBJ_BONUS_DIR)/server
 	$(CC) $(CC_FLAGS) $< $(INCLUDE_BONUS_FLAGS) -c -o $@
 
-$(OBJ_DIR)/client/%.o: $(CLIENT_SRC_DIR)/%.c $(CLIENT_HEADER_FILES)
+$(OBJ_DIR)/client/%.o: $(SRC_DIR)/client/%.c $(CLIENT_HEADER_FILES)
 	mkdir -p $(OBJ_DIR)/client
 	$(CC) $(CC_FLAGS) $< $(INCLUDE_FLAGS) -c -o $@
 
-$(OBJ_DIR)/server/%.o: $(SERVER_SRC_DIR)/%.c $(SERVER_HEADER_FILES)
+$(OBJ_DIR)/server/%.o: $(SRC_DIR)/server/%.c $(SERVER_HEADER_FILES)
 	mkdir -p $(OBJ_DIR)/server
 	$(CC) $(CC_FLAGS) $< $(INCLUDE_FLAGS) -c -o $@
 

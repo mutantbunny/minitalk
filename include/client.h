@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 02:47:44 by gmachado          #+#    #+#             */
-/*   Updated: 2022/07/28 02:48:25 by gmachado         ###   ########.fr       */
+/*   Updated: 2022/08/01 03:32:23 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 # define CLIENT_H
 
 # include <minitalk.h>
+
+# define WAIT_TIME 150
 
 #endif
