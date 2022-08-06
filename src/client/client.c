@@ -6,11 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 02:48:28 by gmachado          #+#    #+#             */
-/*   Updated: 2022/08/01 03:21:02 by gmachado         ###   ########.fr       */
+/*   Updated: 2022/08/06 02:59:36 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include <minitalk.h>
 
 static void	send_char(int pid, char ch)
 {
@@ -19,12 +19,17 @@ static void	send_char(int pid, char ch)
 	pos = 7;
 	while (pos >= 0)
 	{
-		if (ch & (1 << pos))
-			kill(pid, SIGUSR2);
+		if (ch & (1 << pos--))
+		{
+			if (kill(pid, SIGUSR2))
+				send_error(pid, SIGUSR2);
+		}
 		else
-			kill(pid, SIGUSR1);
+		{
+			if (kill(pid, SIGUSR1))
+				send_error(pid, SIGUSR1);
+		}
 		usleep(WAIT_TIME);
-		pos--;
 	}
 }
 

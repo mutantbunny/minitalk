@@ -6,11 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 02:42:22 by gmachado          #+#    #+#             */
-/*   Updated: 2022/08/01 03:31:21 by gmachado         ###   ########.fr       */
+/*   Updated: 2022/08/06 03:03:55 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <server.h>
+#include <minitalk.h>
 
 void	sig_handler(int sig_num)
 {
@@ -36,13 +36,20 @@ void	sig_handler(int sig_num)
 int	main(void)
 {
 	struct sigaction	action;
+	int					err;
 
+	action = (struct sigaction){0};
 	action.sa_handler = sig_handler;
-	sigemptyset(&action.sa_mask);
-	sigaddset(&action.sa_mask, SIGUSR1);
-	sigaddset(&action.sa_mask, SIGUSR2);
-	sigaction(SIGUSR1, &action, NULL);
-	sigaction(SIGUSR2, &action, NULL);
+	err = sigemptyset(&action.sa_mask);
+	err |= sigaddset(&action.sa_mask, SIGUSR1);
+	err |= sigaddset(&action.sa_mask, SIGUSR2);
+	err |= sigaction(SIGUSR1, &action, NULL);
+	err |= sigaction(SIGUSR2, &action, NULL);
+	if (err)
+	{
+		ft_printf("Error setting up signal handlers");
+		return (1);
+	}
 	ft_printf("Server PID: %i\n", getpid());
 	while (1)
 		pause();

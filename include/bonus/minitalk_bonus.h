@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 02:41:11 by gmachado          #+#    #+#             */
-/*   Updated: 2022/08/04 03:58:36 by gmachado         ###   ########.fr       */
+/*   Updated: 2022/08/06 02:54:32 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@
 # include <signal.h>
 # include <unistd.h>
 # include <libft.h>
+
+void	send_error(int pid, int sig_num);
 
 #endif
