@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 02:48:28 by gmachado          #+#    #+#             */
-/*   Updated: 2022/08/06 03:04:15 by gmachado         ###   ########.fr       */
+/*   Updated: 2022/08/06 14:10:52 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,26 +44,41 @@ static void	response_handler(int sig_num)
 	g_ready = 1;
 }
 
+int	initialize_handler(struct sigaction *action)
+{
+	action->sa_handler = response_handler;
+	if (sigemptyset(&(action->sa_mask)) || sigaction(SIGUSR1, action, NULL))
+	{
+		ft_printf("Error setting up signal handlers");
+		return (1);
+	}
+	return (0);
+}
+
 int	main(int argc, char *argv[])
 {
 	char				*current;
-	int					pid;
 	struct sigaction	action;
+	int					pid;
 
 	if (argc != 3)
 	{
-		ft_printf("Usage: %s <PID of server> \"message\"\n", argv[0]);
+		ft_printf("Error: invalid number of arguments.\n");
+		ft_printf("Usage: %s <server PID> \"message\"\n", argv[0]);
 		return (1);
 	}
-	action.sa_handler = response_handler;
-	sigemptyset(&action.sa_mask);
-	sigaction(SIGUSR1, &action, NULL);
 	pid = ft_atoi(argv[1]);
+	if (pid <= 0)
+	{
+		ft_printf("Error: invalid PID.\n");
+		ft_printf("Usage: %s <server PID> \"message\"\n", argv[0]);
+		return (1);
+	}
+	if (initialize_handler(&action))
+		return (1);
 	current = argv[2];
 	g_ready = 1;
 	while (*current != '\0')
-	{
 		send_char(pid, *current++);
-	}
 	send_char(pid, '\0');
 }

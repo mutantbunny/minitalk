@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/06 02:52:52 by gmachado          #+#    #+#             */
-/*   Updated: 2022/08/06 03:13:36 by gmachado         ###   ########.fr       */
+/*   Updated: 2022/08/06 14:26:59 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	send_error(int pid, int sig_num)
 {
 	if (sig_num == SIGUSR1)
 		ft_printf("Error: failed to send signal SIGUSR1 to PID %i\n", pid);
-	if (sig_num == SIGUSR2)
+	else if (sig_num == SIGUSR2)
 		ft_printf("Error: failed to send signal SIGUSR2 to PID %i\n", pid);
 	else
 		ft_printf(
